@@ -31,13 +31,5 @@ c = 200;
 console.log(a); //undefined //200 --> reference to c is saved in innerFunction
 a(); //TypeError: a is not a function
 
-function outer() {
-    let outerVar = "I am from outer function";  
-    return function inner() {   
-        console.log(outerVar);
-    }
-}
 
-//Closure - function along with its lexical scope
-let innerFunc = outer();
-innerFunc(); //I am from outer function
+
