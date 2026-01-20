@@ -1,3 +1,6 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 console.log("Hello, world!");
-var age = 30;
-console.log(age);
+let myAge = 30;
+console.log(myAge);
+//# sourceMappingURL=index.js.map
