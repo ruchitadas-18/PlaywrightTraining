@@ -22,3 +22,12 @@ let employee: [number, string, boolean] = [101, "John Doe", true];
 console.log("Employee Tuple:", employee);
 
 //tuple -> array of fixed size and types
+var add: string[] = ["Hello", "World"];
+var emp: [number, string, boolean] = [101, "John Doe", true];
+
+emp.push("Noida"); // Allowed: Adding an extra boolean value
+console.log("Employee after push:", emp);
+
+// Destructuring the tuple
+let [empId, empName, empStatus] = emp;
+console.log(`Employee ID: ${empId}, Name: ${empName}, Status: ${empStatus}`);   

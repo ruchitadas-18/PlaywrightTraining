@@ -19,3 +19,10 @@ console.log("Colleges:", colege);
 var employee = [101, "John Doe", true];
 console.log("Employee Tuple:", employee);
 //tuple -> array of fixed size and types
+var add = ["Hello", "World"];
+var emp = [101, "John Doe", true];
+emp.push("Noida"); // Allowed: Adding an extra boolean value
+console.log("Employee after push:", emp);
+// Destructuring the tuple
+var empId = emp[0], empName = emp[1], empStatus = emp[2];
+console.log("Employee ID: ".concat(empId, ", Name: ").concat(empName, ", Status: ").concat(empStatus));
