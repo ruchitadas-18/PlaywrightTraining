@@ -11,4 +11,6 @@ browser Name: 'chromium'
 headless : 'true'
 }
 
+to run only 1 file-> pass the file name in the terminal
+npx playwright test tests\<file name>
 */
