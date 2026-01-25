@@ -13,4 +13,13 @@ headless : 'true'
 
 to run only 1 file-> pass the file name in the terminal
 npx playwright test tests\<file name>
+
+Await -> required only when an action is taking 
+
+Usages of Expects:
+1. Validate the outcome
+2. Fails the test if the condition is not met
+3. auto-waits 
+4. give clear error messages
+
 */

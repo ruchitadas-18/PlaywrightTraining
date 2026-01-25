@@ -23,4 +23,12 @@ to show paraly values use regex = [style* = 'none']
 if there is no attributes can provide tagnames like link: a
 find out the element from sequence 
 await page.locator(".card-body a").nth(0).textContent()
+await page.locator(".card-body a").first().textContent()
+await page.locator(".card-body a").last().textContent()
+
+Both lines **check a radio button**, but they serve **different purposes** in Playwright.
+`expect(page.locator(...)).toBeChecked()` is an **assertion**. It’s used in tests to **verify behavior**. If the radio button is *not* checked, the test **fails** and stops. It also has **auto-waiting**, so Playwright 
+waits until the condition becomes true or times out.
+`await locator.isChecked()` is a **query**. It simply **returns a boolean** (`true` or `false`) and does **not fail the test**. Logging it with `console.log` is mainly for **debugging or inspection**, not validation.
+
 */

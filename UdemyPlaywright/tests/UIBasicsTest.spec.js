@@ -76,7 +76,6 @@ test('First Playwright', async ({browser}) => {
     //listing all the product
     const allTitles=  await cardTitles.allTextContents;
     console.log(allTitles);
- 
     
 });
 
