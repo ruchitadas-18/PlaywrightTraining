@@ -3,7 +3,7 @@
 css -> tagname#id or #id
 
 2. if class attribute is present
-css -> tagname.class or .id
+css -> tagname.class or .class
 
 3. write css based on any attribute
 css -> [attribute = 'value'] 
@@ -13,6 +13,10 @@ css -> parenttagname >> childtagname
 
 5. if needs to write the locator based on text
 text = ' '
+
+6. Only for header: "h3:has-text('ADIDAS ORIGINAL')"
+
+7. for tables use tbody
 
 Two method to enter value
 type or fill
