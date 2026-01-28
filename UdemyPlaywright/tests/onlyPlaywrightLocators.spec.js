@@ -21,7 +21,15 @@ test('special locator', async ({ page }) => {
     //link
     await page.getByRole("link",{name: 'Shop'}).click();
 
-    await page.locator("app-card").filter()
+    //filtering based on name
+    await page.locator("app-card").filter({hasText: 'Blackberry'}).getByRole("button").click();
+
+    //if getByLabel -> works for edit box inside in label as well as linkage like same id
+    
+
+
+
+
 
 });
 
