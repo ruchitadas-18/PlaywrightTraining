@@ -1,0 +1,35 @@
+/*
+push to GitHub
+git init
+git add .
+git commit -m <"Commit Name">
+git push origin master
+
+Typescript ---> JavaScript 
+npx tsc <name of ts file>
+
+if you want it to convert ts javascript
+tsc <name of ts file> --watch
+
+to see the result of typescript
+node <tS file name>
+
+Playwright commands
+npm init playwright
+
+npx playwright test ---> blindly run the test filw
+
+
+to run only 1 file-> pass the file name in the terminal
+npx playwright test tests\<file name>
+npx playwright test --ui 
+
+//debug
+npx playright test <filename> --debug
+
+//codegen
+npx playwright codegen <site url>
+
+//how to debug for both api and UI
+npx playwright test <file address> --headed -- debug
+*/
