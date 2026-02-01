@@ -23,7 +23,7 @@ test('Java Pop Up', async({page})=>{
     await page.goto("https://rahulshettyacademy.com/AutomationPractice/");
     //listen when event like dialoge occur
     //to accept the java alerts
-    await page.pause();
+    //await page.pause();
     page.on('dialog',dialog => dialog.accept());
     //to cancel the java alerts
     //page.on('dialog', dialog => dialog.dismiss());
@@ -32,3 +32,21 @@ test('Java Pop Up', async({page})=>{
 
 })
 
+test('Screenshot', async({page}) => {
+    await page.goto("https://rahulshettyacademy.com/AutomationPractice/");
+    await expect(page.locator("#displayed-text")).toBeVisible();
+    //screenshot on element
+    await page.locator("#displayed-text").screenshot({path:'Partialscreenshot.png'});
+    await page.locator("#hide-textbox").click();
+    //screenshot
+    await page.screenshot({path: 'screenshot.png'});
+    await expect(page.locator("#displayed-text")).toBeHidden();
+
+})
+
+  //compare the screenshot with previous day
+    
+test.only("Visual", async({page}) =>{
+    await page.goto("https://www.flightaware.com");
+    expect(await page.screenshot()).toMatchSnapshot('screenshot1.png');
+})

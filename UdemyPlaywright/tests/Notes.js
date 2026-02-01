@@ -26,4 +26,14 @@ Usages of Expects:
 3. auto-waits 
 4. give clear error messages
 
+//blocking the network
+not loading css
+page.route("**"/"*.css".route =>route.abort())
+
+block the images
+page.route("**"/"*.{jpg, jpge, png}".route =>route.abort())
+
+register all the network calls
+page.on('request',request => request.url());
+page.on('response',response => response.url(), response.statuscall());
 */
