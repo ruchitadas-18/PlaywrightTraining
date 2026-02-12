@@ -15,7 +15,7 @@ test('Product List', async({page})=>{
 })
 
 //TC-2  Verify Add to Cart from Product List Page
-test('Add to Cart',async({page})=>{
+test.only('Add to Cart',async({page})=>{
     await login(page);
     await page.getByRole('button',{name:'Add to cart'}).first().click();
 
@@ -23,8 +23,8 @@ test('Add to Cart',async({page})=>{
     await expect(page.locator('#remove-sauce-labs-backpack')).toHaveText('Remove');
 
     //checking if added to the cart
-    const AddedItem = page.locator('shopping_cart_badge').textContent();
-    console.log(AddedItem);
+    await expect(page.locator('.shopping_cart_badge')).toHaveText('1');
+
 
 }) 
 
@@ -43,10 +43,5 @@ test('Comparing Price', async({page}) =>{
         expect(price[i]).toBeLessThanOrEqual(price[i+1]);
     }
 
-
-})
-
-//TC-4 Verify Navigation to Product Details Page 
-test('Product Detail Page', async({page})=>{
 
 })
