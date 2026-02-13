@@ -1,34 +1,26 @@
 //Assignment --> Login into client side and fetch 1 element
 const {test, expect}=require('@playwright/test')
-const LoginPage = require('../PageObject/LoginPage')
+const PoManager = require('../PageObject/PoManager')
+const testData = JSON.parse(JSON.stringify(require('../Utils/PlaceOrder.json')));
 
+//for multiple test cases
+//for{const data of testData}{
+//test(`Login into client dashboard with ${data.email} and ${data.password}`,async({page}) =>{
 test.only('Login into client dashboard',async({page}) =>{
    
-    const loginPage = new LoginPage(page);
-    const productName = page.locator(".card-body")
-
-    const email = "gihiw10644@gxuzi.com";
-    const password = "3hUh8rkg!8.Yxs$";
+    const poManager = new PoManager(page);
+    const loginPage = poManager.getLoginPage();
+    const dashboard = poManager.getDashboard();
+        
     await loginPage.goto();
-    await loginPage.validLogin(email,password);
+    await loginPage.validLogin(testData.email,testData.password);
+    await dashboard.searchProduct(testData.productName);
+    dashboard.navigateToCart();
 
-    await page.locator(".card-body b").first().waitFor(); // only wait for 1 element
-    console.log(await page.locator(".card-body b").allTextContents());
-
-    const count = await productName.count();
-    for(let i =0; i<count; ++i){
-        if(await productName.nth(i).locator("b").textContent() == "ADIDAS ORIGINAL"){
-            //locator using name of button
-            await productName.nth(i).locator("text = Add To Cart").click();
-            break;
-        }
-    }
-    
-    await page.locator("[routerlink*='cart']").click();
 
     await page.locator("div li").first().waitFor();
-    const bool = await page.locator("h3:has-text('ADIDAS ORIGINAL')").isVisible();
-    expect(bool).toBeTruthy(); 
+    await expect(page.locator("h5", { hasText: testData.productName })).toBeVisible();
+
 
     await page.locator("text=Checkout").click();
 
@@ -44,7 +36,7 @@ test.only('Login into client dashboard',async({page}) =>{
     await page.locator('input[type="text"]').nth(2).fill("New Born");
 
     //assertion for email
-   expect(page.locator(".user__name [type='text']").first()).toHaveText(email);
+   expect(page.locator(".user__name [type='text']").first()).toHaveText(testData.email);
     //dropdown
     //fill is not suitable -> since it will enter togther -> intoduce pressSequence
     //Presssequencially may fail due to heavy traffic. Therefore need to add delays
