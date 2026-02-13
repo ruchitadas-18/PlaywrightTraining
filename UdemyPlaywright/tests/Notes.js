@@ -12,7 +12,25 @@ headless : 'true'
 screenshot: 'on
 trace: 'on'
 }
+projects: [
+{collection of test cases to run in different browsers}
+name: 'chromium',   
+use: {browserName: 'chromium'}
+},
+{
+name: 'firefox',                                                                       
+use: {browserName: 'firefox'}
+device: 'iPhone 12' -> to run in mobile simulator
+},
+]
 
+//viewport -> mobile simulator
+use: {
+viewport: {width: 1280, height: 720}
+ignoreHTTPSErrors: true -> to ignore the https errors
+permissions: ['geolocation'] -> to give permissions to the browser
+video: 'on' -> to record the video of the test execution
+}
 
 
 to run only 1 file-> pass the file name in the terminal
@@ -36,4 +54,6 @@ page.route("**"/"*.{jpg, jpge, png}".route =>route.abort())
 register all the network calls
 page.on('request',request => request.url());
 page.on('response',response => response.url(), response.statuscall());
+
+
 */

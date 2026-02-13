@@ -1,0 +1,10 @@
+const {base} = require('@playwright/test');
+const test = require('node:test');
+
+expect.test = base.test.extend({
+    testDataForOrder:{
+        "productName": "ADIDAS ORIGINAL",
+        "email": "gihiw10644@gxuzi.com",
+        "password": "3hUh8rkg!8.Yxs$"
+    }
+});
