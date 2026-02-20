@@ -32,6 +32,11 @@ permissions: ['geolocation'] -> to give permissions to the browser
 video: 'on' -> to record the video of the test execution
 }
 
+config = {
+testDir: './tests',
+retries:`2, // to retry the failed test cases 2 times
+timeout: 30 * 1000,
+reporter: 'html',}
 
 to run only 1 file-> pass the file name in the terminal
 npx playwright test tests\<file name>
