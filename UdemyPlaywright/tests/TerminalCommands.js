@@ -1,4 +1,5 @@
-/*
+/*Testing Material
+
 push to GitHub
 git init
 git add .
@@ -32,4 +33,22 @@ npx playwright codegen <site url>
 
 //how to debug for both api and UI
 npx playwright test <file address> --headed -- debug
+
+//to run custom config file
+npx playeright test <filepath> --config <config path>
+
+//run specific feature files
+npx cucumber-js features/<filename> --exit
+
+//run based on tags
+npx cucumber-js --tags "@tagname" --exit
+
+//generate htlml
+npx cucumber-js <feature path> --parallel 2 --exit --format html:cucumber
+
+//retry
+npx cucumber-js --tag "@tag" --retry 1 --exit . --format html:cucumber-report
+
+
+
 */

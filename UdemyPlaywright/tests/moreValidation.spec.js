@@ -1,5 +1,5 @@
 const {test,expect} = require('@playwright/test')
-
+test.describe.configure({mode: 'parallel'});
 test('Popup Validation', async ({page})=>{
     await page.goto("https://rahulshettyacademy.com/AutomationPractice/");
     /*await page.goto("https://rahulshettyacademy.com/seleniumPractise/#/offers");
@@ -18,6 +18,7 @@ test('Popup Validation', async ({page})=>{
    await expect(page.locator("#displayed-text")).toBeHidden();
 
 })
+
 
 test('Java Pop Up', async({page})=>{
     await page.goto("https://rahulshettyacademy.com/AutomationPractice/");
