@@ -17,10 +17,12 @@ test('Postive Scenario', async({page})=>{
 
     //await page.locator("#input-date").click();
     //how to access the calender locators when its not visble in calender
+    await page.getByRole('textbox', { name: 'Input: Date' }).fill('2026-03-19');
+    
 
     //Output
     await page.getByRole('button', {name: 'Display Inputs'}).click();
-
+    await page.pause();
     //checking the output
     const num = await page.locator("#output-number").textContent();
     console.log(num == num1);
