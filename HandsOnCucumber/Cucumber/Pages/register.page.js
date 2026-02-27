@@ -1,14 +1,13 @@
-import{Page, expect} from '@playwright/test';
-
 class RegisterPage{
     constructor(page){
         this.page = page;
-        this.firstName = page.getByLabel('Male');
+        this.firstName = page.locator('#FirstName');
         this.lastName = page.locator('#LastName');
         this.email = page.locator('#Email');
         this.password = page.locator('#Password');
         this.confirmPassword = page.locator('#ConfirmPassword');
-        this.genderMale = page.locator('#genderMale');
+        this.genderMale = page.getByRole('radio', { name: 'Male', exact: true })
+        this.genderFemale = page.getByRole('radio', { name: 'Female' })
         this.registerButton = page.locator('#register-button');
     }
 
@@ -39,4 +38,4 @@ class RegisterPage{
 
 }
 
-export default RegisterPage;
+module.exports = RegisterPage;

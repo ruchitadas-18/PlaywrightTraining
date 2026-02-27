@@ -1,22 +1,22 @@
-const {Given, When, Then, And} = require('@cucumber/cucumber');
-const RegisterPage = require('../Pages/registerPage');
+const {Given, When, Then} = require('@cucumber/cucumber');
+const RegisterPage = require('../Pages/register.page');
 let registerPage;
 
-Given('user is on the registration page', function () {       
+Given('user is on the registration page', async function () {       
   registerPage = new RegisterPage(this.page);
   return registerPage.navigateToWebsite();  
 });
 
-When('user fill in the  enter personal details {string},{string}, {string}, {string}', function (firstName, lastName, email, password) {
+When('user fill in the enter personal details {string},{string}, {string}, {string}', async function (firstName, lastName, email, password) {
   return registerPage.enterPersonalDetails(firstName, lastName, email, password);
 });
 
-And('user select the gender {string}', function (gender) {   
+When('user select the gender {string}', async function (gender) {   
            // Write code here that turns the phrase above into concrete actions
            return registerPage.selectGender(gender);
 });
 
-Then('user click on the register button', function () {       
+Then('user click on the register button', async function () {       
            // Write code here that turns the phrase above into concrete actions
            return registerPage.clickRegisterButton();
          });
