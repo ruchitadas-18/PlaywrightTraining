@@ -1,3 +1,5 @@
+const config = require('../config');
+//yipafex639@fentaoba.com
 class RegisterPage{
     constructor(page){
         this.page = page;
@@ -11,9 +13,9 @@ class RegisterPage{
         this.registerButton = page.locator('#register-button');
     }
 
-    async navigateToWebsite(){
-        await this.page.goto('https://demowebshop.tricentis.com/register');
-    }
+    /*async navigateToWebsite(){
+        await this.page.goto(`${this.config.baseUrl}/register`);
+    }*/
 
     async enterPersonalDetails(firstName, lastName, email, password){
         await this.firstName.fill(firstName);
@@ -35,7 +37,10 @@ class RegisterPage{
         await this.registerButton.click();
     }
 
-
+    async verifyRegistrationSuccess(){
+        await expect(this.page.getByText('Your registration completed', { exact: true })).toBeVisible();
+        await this.page.locator(".input[value='Continue']").click();
+    }
 }
 
 module.exports = RegisterPage;

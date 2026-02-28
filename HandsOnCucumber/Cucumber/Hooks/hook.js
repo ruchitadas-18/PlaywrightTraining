@@ -1,6 +1,5 @@
 const {Before, After} = require('@cucumber/cucumber');
 const {chromium} = require('@playwright/test');
-const playwright = require('@playwright/test');
 
 let browser;
 Before(async function () {
