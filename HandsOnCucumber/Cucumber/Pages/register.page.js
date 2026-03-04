@@ -39,7 +39,7 @@ class RegisterPage{
 
     async verifyRegistrationSuccess(){
         await expect(this.page.getByText('Your registration completed', { exact: true })).toBeVisible();
-        await this.page.locator(".input[value='Continue']").click();
+        await this.page.locator("input[value='Continue']").click();
     }
 }
 
