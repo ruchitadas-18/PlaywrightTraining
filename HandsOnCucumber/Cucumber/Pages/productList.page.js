@@ -1,8 +1,8 @@
 class ProductListPage {
     constructor(page){
         this.page = page;
-        this.productList = this.page.locator('.product-item');
-        this.categoryName = this.page.locator('.mob-top-menu show');
+        this.productList = this.page.locator('.product-title a');
+        this.categoryName = this.page.locator('.top-menu');
         this.displayProducts = this.page.locator('#products-pagesize');
         this.addToCart = this.page.locator('.product-box-add-to-cart-button');  
     }
@@ -26,3 +26,5 @@ class ProductListPage {
 
 
 }
+
+module.exports = ProductListPage

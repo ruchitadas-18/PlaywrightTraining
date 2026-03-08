@@ -28,3 +28,5 @@ class AddToCartPage {
         await this.removeButton.filter({ hasText: itemName }).click();
     }
 }
+
+module.exports = AddToCartPage
