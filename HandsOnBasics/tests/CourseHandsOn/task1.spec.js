@@ -23,7 +23,7 @@ test('Create new event', async ({page})=>{
     await loginPage.navigate("https://eventhub.rahulshettyacademy.com/events");
     const confirmBook = new Book(page);
     await confirmBook.extractEventDetail(createNewEvent.eventTitle);
-    await confirmBook.bookingDetails();
+    await confirmBook.bookingDetailsForTwo();
     await confirmBook.confirmBooking(createNewEvent.eventTitle);
 
     await loginPage.navigate("https://eventhub.rahulshettyacademy.com/events");

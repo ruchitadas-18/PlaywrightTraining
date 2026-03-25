@@ -1,6 +1,7 @@
-const testData = JSON.parse(JSON.stringify(require('../testData.json')));
+const testData = JSON.parse(JSON.stringify(require('../Utils/testData.json')));
 const {expect} = require('@playwright/test')
 class Book{
+    bookingRef;
     constructor(page){
         this.page = page;
         this.eventsList = this.page.getByTestId('event-card');
@@ -11,6 +12,7 @@ class Book{
         this.bookingButton = this.page.getByRole('button',{name:'Confirm Booking'});
         this.viewBookingButton = this.page.getByRole('link',{name: 'View My Bookings'});
         this.bookingCards = this.page.getByTestId('booking-card');
+       
     }
 
     async extractEventDetail(eventTitle){
@@ -26,11 +28,21 @@ class Book{
         await targetCard.getByTestId('book-now-btn').click();
     }
 
-    async bookingDetails() {
+    async bookingDetailsForTwo() {
         await expect(this.ticketCount).toHaveText('1');
 
         await this.page.getByRole('button', { name: '+' }).click();
         await expect(this.ticketCount).toHaveText('2');
+
+        await this.firstName.fill(testData.fullName);
+        await this.emailName.fill(testData.email);
+        await this.phoneNumber.fill(testData.phone);
+
+        await this.bookingButton.click();
+    }
+
+    async bookingDetailsForOne() {
+        await expect(this.ticketCount).toHaveText('1');
 
         await this.firstName.fill(testData.fullName);
         await this.emailName.fill(testData.email);
@@ -44,20 +56,32 @@ class Book{
         const bookingRefEl = this.page.locator('.booking-ref').first();
         await expect(bookingRefEl).toBeVisible();
 
-        const bookingRef = (await bookingRefEl.innerText()).trim();
-        expect(bookingRef.charAt(0)).toBe(eventTitle.trim().charAt(0).toUpperCase());
+        this.bookingRef = (await bookingRefEl.innerText()).trim();
+        expect(this.bookingRef.charAt(0)).toBe(eventTitle.trim().charAt(0).toUpperCase());
 
-        console.log(`Booking Confirm Ref: ${bookingRef}`);
+        console.log(`Booking Confirm Ref: ${this.bookingRef}`);
 
         await this.viewBookingButton.click();
         await expect(this.page).toHaveURL('https://eventhub.rahulshettyacademy.com/bookings');
         
         await expect(this.bookingCards.first()).toBeVisible();
-        const matchingCard = this.bookingCards.filter({ has: this.page.locator('.booking-ref', { hasText: bookingRef }) });
-        await await expect(matchingCard).toBeVisible();
+        const matchingCard = this.bookingCards.filter({ has: this.page.locator('.booking-ref', { hasText: this.bookingRef }) });
+        await expect(matchingCard).toBeVisible();
         await expect(matchingCard).toContainText(eventTitle);
-        console.log(`Booking card found in My Bookings for ref: ${bookingRef}`);
+        console.log(`Booking card found in My Bookings for ref: ${this.bookingRef}`);
     }
+
+    async validatingBook(eventTitle){
+
+        const targetCard = this.bookingCards.filter({ has: this.page.locator('.booking-ref', { hasText: this.bookingRef })});
+
+        await targetCard.getByRole('button', { name: 'View Details' }).click();
+        const nameChar = eventTitle.trim().charAt(0).toUpperCase();
+        const refChar = this.bookingRef.charAt(0);
+        expect(refChar).toBe(nameChar);
+        console.log(refChar);
+    }
+
 
 }
 
