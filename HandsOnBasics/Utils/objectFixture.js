@@ -1,29 +1,28 @@
 const LoginPage = require('../page/login');
 const BookingRefund = require('../page/bookingRefund');
 const Book = require('../page/book');
-const createNewPage = require('../page/createNewEvent');
+const CreateNewPage = require('../page/createNewEvent');
 
-class ObjectFixture{
-    constructor(page){
+class ObjectFixture {
+    constructor(page) {
         this.page = page;
     }
 
-    async loginPage(){
-        new LoginPage(this.page);
+    loginPage() {
+        return new LoginPage(this.page);
     }
 
-    async newEvent(){
-        new createNewPage(page);
+    newEvent() {
+        return new CreateNewPage(this.page);
     }
 
-    async bookingDetails(){
-        new Book(page);
+    bookingDetails() {
+        return new Book(this.page);
     }
 
-    async refundDetails(){
-        new BookingRefund(page);
+    refundDetails() {
+        return new BookingRefund(this.page);
     }
-    
 }
 
 module.exports = ObjectFixture;

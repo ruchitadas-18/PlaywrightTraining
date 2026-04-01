@@ -4,7 +4,7 @@ const BookingRefund = require('../../page/bookingRefund');
 const Book = require('../../page/book');
 
 test('Booking for two events', async({page})=>{
-     const loginPage = new LoginPage(page);
+    const loginPage = new LoginPage(page);
     await loginPage.navigate("https://eventhub.rahulshettyacademy.com/login");
     await loginPage.login();
 
