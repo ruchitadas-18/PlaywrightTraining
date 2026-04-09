@@ -14,3 +14,10 @@ console.log(data);
 data = 123;
 console.log(data);
 
+function greet(name: string): string {
+    return `Hello, ${name}!`;
+}   
+
+greet('Alice');
+// greet(42); // This will cause a type error because the argument must be a string.
+
