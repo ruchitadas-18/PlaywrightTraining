@@ -1,6 +1,19 @@
-class CreateNewEvent {
+import {Page, Locator} from '@playwright/test'
+
+export class CreateNewEvent {
+
+    page: Page;
+    titleInput: Locator;
+    categoryDropdown: Locator;
+    cityInput: Locator;
+    venueInput: Locator;
+    dateTime: Locator;
+    priceInput: Locator;
+    seat: Locator;  
+    addEventButton: Locator;
+    eventTitle: any;
     
-    constructor(page) {
+    constructor(page: Page) {
         this.page = page;
         this.titleInput = this.page.getByPlaceholder("Event Title");
         this.categoryDropdown = this.page.locator('#category');
@@ -26,4 +39,4 @@ class CreateNewEvent {
 
 }
 
-module.exports = CreateNewEvent;
+export default CreateNewEvent;

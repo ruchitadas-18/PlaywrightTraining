@@ -1,10 +1,11 @@
-import { test, expect } from '@playwright/test';
-const LoginPage = require('../../page/login');
-const eventData = require('../../Utils/eventData.json');
+import { test, expect, Page, Locator } from '@playwright/test';
+import LoginPage from '../pages/login';
+import eventData from '../Utils/eventData.json';
 
 const BASE_URL = 'https://eventhub.rahulshettyacademy.com';
 
-async function loginAndGoToEvents(page) {
+//Login and navigate to events page
+async function loginAndGoToEvents(page: Page) {
   const loginPage = new LoginPage(page);
   await loginPage.navigate(`${BASE_URL}/login`);
   await loginPage.login();
@@ -13,7 +14,10 @@ async function loginAndGoToEvents(page) {
   await page.goto(`${BASE_URL}/events`);
 }
 
+// ── Test 1: 6 events → banner is visible ─────────────────────────────────────
 test('sandbox banner is shown when 6 events are returned', async ({ page }) => {
+
+  //intercept the API call and return 6 events from the fixture
   await page.route('**/api/events**', async (route) => {
     await route.fulfill({
       status: 200,
@@ -34,6 +38,8 @@ test('sandbox banner is shown when 6 events are returned', async ({ page }) => {
 
 // ── Test 2: 4 events → banner is NOT visible ──────────────────────────────────
 test('sandbox banner is hidden when 4 events are returned', async ({ page }) => {
+  
+  //intercept the API call and return 4 events from the fixture
   await page.route('**/api/events**', async (route) => {
     await route.fulfill({
       status:      200,

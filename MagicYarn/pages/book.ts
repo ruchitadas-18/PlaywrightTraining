@@ -1,8 +1,23 @@
-const testData = JSON.parse(JSON.stringify(require('../Utils/testData.json')));
-const {expect} = require('@playwright/test')
-class Book{
-    bookingRef;
-    constructor(page){
+import {expect,Page,Locator} from '@playwright/test'
+import testDataJson from '../utils/testData.json';
+
+type TestData = typeof testDataJson;
+const testData:TestData = JSON.parse(JSON.stringify(testDataJson));
+
+export class Book{
+    page: Page;
+    eventsList: Locator
+    ticketCount: Locator;
+    firstName: Locator;
+    emailName: Locator;
+    phoneNumber: Locator;
+    bookingButton: Locator;
+    viewBookingButton: Locator;
+    bookingCards: Locator;
+    seatsBeforeBooking: any;
+    bookingRef: any;
+
+    constructor(page: Page){
         this.page = page;
         this.eventsList = this.page.getByTestId('event-card');
         this.ticketCount = this.page.locator('#ticket-count');
@@ -15,7 +30,7 @@ class Book{
        
     }
 
-    async extractEventDetail(eventTitle){
+    async extractEventDetail(eventTitle: string){
         await expect(this.eventsList.first()).toBeVisible();
         const targetCard = this.eventsList.filter({ hasText: eventTitle }).first();
         await expect(targetCard).toBeVisible({ timeout: 5000 });
@@ -51,7 +66,7 @@ class Book{
         await this.bookingButton.click();
     }
 
-    async confirmBooking(eventTitle){
+    async confirmBooking(eventTitle: string){
         await expect(this.page.getByRole('heading', { name: 'Booking Confirmed! 🎉' })).toBeVisible();
         const bookingRefEl = this.page.locator('.booking-ref').first();
         await expect(bookingRefEl).toBeVisible();
@@ -71,7 +86,7 @@ class Book{
         console.log(`Booking card found in My Bookings for ref: ${this.bookingRef}`);
     }
 
-    async validatingBook(eventTitle){
+    async validatingBook(eventTitle: string){
 
         const targetCard = this.bookingCards.filter({ has: this.page.locator('.booking-ref', { hasText: this.bookingRef })});
 
@@ -85,4 +100,4 @@ class Book{
 
 }
 
-module.exports = Book;
+export default Book;

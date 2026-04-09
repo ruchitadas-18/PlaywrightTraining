@@ -1,5 +1,11 @@
-class LoginPage {
-    constructor(page){
+import {Page, Locator} from '@playwright/test'
+
+export class LoginPage {
+    page: Page;
+    usernameInput: Locator;
+    passwordInput: Locator;
+    loginButton: Locator;
+    constructor(page: Page) {
         this.page = page;   
         this.usernameInput = page.getByPlaceholder("you@email.com");
         this.passwordInput = page.getByPlaceholder("••••••");
@@ -12,9 +18,9 @@ class LoginPage {
         await this.loginButton.click();
     }
     
-    async navigate(url){
+    async navigate(url: string){
         await this.page.goto(url);
     }
 }
 
-module.exports = LoginPage;
+export default LoginPage;

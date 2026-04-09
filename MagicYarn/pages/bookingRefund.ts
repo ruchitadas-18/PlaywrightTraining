@@ -1,6 +1,11 @@
-const {expect} = require('@playwright/test');
-class BookingRefund{
-    constructor(page){
+import {expect, Page, Locator} from '@playwright/test';
+export class BookingRefund{
+    page: Page;
+    refundBook: Locator;
+    spinner: Locator;
+    result: Locator;
+
+    constructor(page: Page) {
         this.page = page;
         this.refundBook = this.page.getByTestId('check-refund-btn');
         this.spinner=this.page.locator("#refund-spinner");
@@ -26,4 +31,4 @@ class BookingRefund{
     }
 }
 
-module.exports = BookingRefund;
+export default BookingRefund;
