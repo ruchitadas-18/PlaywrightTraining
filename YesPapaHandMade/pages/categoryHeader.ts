@@ -31,7 +31,7 @@ export class mainVavigationHeader{
         this.cart = this.page.locator(".woo-menu-icon");
         this.cartCount = this.page.locator(".woo-menu-icon .wcmenucart-details");
         this.search = this.page.locator(".search-toggle-li");
-        this.searchInput = this.page.getByPlaceholder("Type then hit enter to search...");
+        this.searchInput = this.page.locator(".header-searchform input");
         this.verfyTitle = this.page.locator(".page-header-title");
     }
 

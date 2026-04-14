@@ -4,6 +4,7 @@ import Login from "../pages/login";
 import Dashboard from "../pages/dashboard";
 import ProductListingPage from "../pages/productListingPage";
 import mainVavigationHeader from "../pages/categoryHeader";
+import SearchPage from "../pages/search";
 
 export class ClassFixture {
     page: Page;
@@ -12,6 +13,7 @@ export class ClassFixture {
     dashboard: Dashboard;  
     productList: ProductListingPage;
     mainVavigationHeader: mainVavigationHeader; 
+    searchPage: SearchPage;
 
     constructor(page: Page) {
         this.page = page;
@@ -20,6 +22,7 @@ export class ClassFixture {
         this.dashboard = new Dashboard(page);
         this.productList = new ProductListingPage(page);
         this.mainVavigationHeader = new mainVavigationHeader(page);
+        this.searchPage = new SearchPage(page);
     }
 
     async createRegisterInstance() {
@@ -37,6 +40,10 @@ export class ClassFixture {
     }
     async createMainNavigationHeaderInstance() {
         return this.mainVavigationHeader;
+    }
+
+    async createSearchPageInstance() {
+        return this.searchPage;
     }
 }
 

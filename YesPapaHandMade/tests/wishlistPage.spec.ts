@@ -16,7 +16,7 @@ test("Product Listing Page Features", async ({ page }) => {
   //await productListingPage.applyPriceFilter(40, 100);
   await productListingPage.changeView('list');
   await productListingPage.selectingProduct("YES PAPA LABUBU DOLL The Monsters Big Energy Series Blind Box Cute Toy Decor Gift (Random Color – 1 Pc)");
-  await productListingPage.wishListProduct();
+  await productListingPage.addToWishList();
   await mainHeader.verifyWishListCount("2");
   await productListingPage.selectingProduct("Yes Papa Bag Handles");
   await productListingPage.addToWishList();

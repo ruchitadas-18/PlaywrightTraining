@@ -13,6 +13,8 @@ export class ProductListingPage {
     sortedOptions: Locator;
     breadCrumb: Locator;
     productLocator: Locator;
+    productCard: any;
+    model: Locator;
 
     
     constructor(page: Page) {
@@ -23,7 +25,8 @@ export class ProductListingPage {
         this.listView = page.locator('#oceanwp-list');
         this.sortedOptions = page.locator('.orderby');
         this.breadCrumb = page.locator('.trail-item ');
-        this.productLocator = this.page.locator(".product .woo-product-info .title");
+        this.productLocator = this.page.locator('li.product');
+        this.model = this.page.locator('.tinv-modal-inner');
     }
 
     async changeCategory(expectedCategory: string) {
@@ -42,36 +45,45 @@ export class ProductListingPage {
     async changeView(viewType: 'grid' | 'list') {
         if (viewType === 'grid') {
             await this.gridView.click();
-            // Add assertions to verify grid view is applied
-            //await expect(this.page.locator('.container')).toHaveClass(/grid-view/);
         } else if (viewType === 'list') {
             await this.listView.click();
-            // Add assertions to verify list view is applied
-            //await expect(this.page.locator('.container')).toHaveClass(/list-view/);
         }
     }
+    async selectingProduct(productName: string) {
+        this.productCard = this.productLocator.filter({ hasText: productName }).first();
+        await expect(this.productCard).toBeVisible();
+        await this.productCard.hover();
+    }
 
-    async wishListProduct(productName: string) {
-        const productCard = this.page.locator('li.product').filter({ hasText: productName }).first();
-
-        await expect(productCard).toBeVisible();
-        await productCard.hover();
-
-        const wishListButton = productCard.locator('.woo-wishlist-btn');
+    async wishListProduct(){
+        const wishListButton = this.productCard.locator('.woo-wishlist-btn');
         await wishListButton.click();
-
-        //await this.page.pause();
-        const modal = this.page.locator('.tinv-modal-inner');
-        await expect(modal).toBeVisible();
-
+        await expect(this.model).toBeVisible();
         const closeButton = this.page.locator('.tinvwl_button_close');
         await expect(closeButton).toBeVisible();
-
         await closeButton.click();
     }
 
-    //async addToCart(productName: string) {
+    async addToWishList() {
+        const wishListButton = this.productCard.locator('.woo-wishlist-btn');
+        await wishListButton.click();
+        const modal = this.page.locator('.tinv-modal-inner');
+        await expect(modal).toBeVisible();
+        const viewWishListButton = this.page.getByRole('button', { name: 'View Wishlist' });
+        await expect(viewWishListButton).toBeVisible();
+        await viewWishListButton.click();
+    }
 
+    async navigateToProductDetails(productName: string) {
+        const productLink = this.page.getByRole('link', { name: productName }).first();
+        await expect(productLink).toBeVisible();
+        await productLink.click();
+        //verifying the category change by checking the breadcrumb
+        const breadcrumbItem = this.breadCrumb.filter({ hasText: productName });
+        await expect(breadcrumbItem).toContainText(productName);
+        const text = await breadcrumbItem.textContent(); 
+        console.log(text);
+    }
 }
 
 export default ProductListingPage;
