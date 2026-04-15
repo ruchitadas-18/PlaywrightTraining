@@ -5,6 +5,7 @@ import Dashboard from "../pages/dashboard";
 import ProductListingPage from "../pages/productListingPage";
 import mainVavigationHeader from "../pages/categoryHeader";
 import SearchPage from "../pages/search";
+import ProductDetailPage from "../pages/productDetailPage";
 
 export class ClassFixture {
     page: Page;
@@ -45,6 +46,11 @@ export class ClassFixture {
     async createSearchPageInstance() {
         return this.searchPage;
     }
+
+    async createProductDetailPageInstance() {
+        return new ProductDetailPage(this.page);
+    }
+    
 }
 
 export default ClassFixture;

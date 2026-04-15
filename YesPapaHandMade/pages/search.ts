@@ -13,16 +13,11 @@ export class SearchPage {
     }
 
    async lookForProduct(productName: string) {
-        const productCard = this.page.locator('article', {
-            has: this.page.getByRole('heading', { name: productName })
-        });
+        const productCard = this.page.locator('article', {has: this.page.getByRole('heading', { name: productName })}).first();
 
         await expect(productCard).toBeVisible();
 
-        await Promise.all([
-            productCard.getByRole('link', { name: /Continue Reading/i }).click()
-        ]);
-
+        await Promise.all([productCard.getByRole('link', { name: /Continue Reading/i }).click()]);
         await expect(this.page.getByRole('heading', { level: 1 })).toHaveText(productName);
     }
 }
