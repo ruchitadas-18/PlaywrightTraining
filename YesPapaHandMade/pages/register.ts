@@ -1,8 +1,5 @@
 import {Page, Locator, expect} from "@playwright/test";
-import testDataJson from '../utils/registerLogin.json';
-
-type TestData = typeof testDataJson;
-const testData: TestData = JSON.parse(JSON.stringify(testDataJson));
+import {faker} from '@faker-js/faker'
 
 export class Register{  
     page: Page;
@@ -13,6 +10,8 @@ export class Register{
     register: Locator;
     logButton: Locator;
     BaseURL: string = 'https://yespapahandmade.com/';
+    randomUserName: string = faker.internet.username();
+    maxTry: number = 2;
 
     constructor(page: Page){
         this.page = page;
@@ -30,17 +29,21 @@ export class Register{
     
     async fillRegistrationDetails(){
         await this.register.click();
-        await this.username.fill(testData.username);
-        await this.email.fill(testData.email);
-        await this.password.fill(testData.password);
-        await this.regButton.click();
+        await this.username.fill(this.randomUserName);
+        await this.email.fill(faker.internet.email());
+        await this.password.fill(faker.internet.password());
+        for(let i = 0; i < this.maxTry; i++){
+            await this.regButton.click();
+        }
+
     }
 
     async verifyRegistrationSuccess(){
-        const checkUserName = this.page.locator('.name');
+        await this.page.waitForURL(`${this.BaseURL}my-account/`, { timeout: 10000 });
+        const checkUserName = this.page.getByText(this.randomUserName).nth(2)
         
         await expect(checkUserName).toBeVisible();
-        await expect(checkUserName).toHaveText(testData.username);
+        await expect(checkUserName).toHaveText(this.randomUserName);
     }
 
 }

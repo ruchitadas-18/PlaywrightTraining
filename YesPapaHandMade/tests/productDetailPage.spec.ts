@@ -1,20 +1,16 @@
-import { test } from '@playwright/test';
-import ClassFixture from '../utils/ClassFixture';
+import { test } from '../utils/objectFixture';
+import Login from '../pages/login'
+import UserInput from '../utils/UserInput.json';
 
-test("Product Listing Page Features", async ({ page }) => {
-  const classFixture = new ClassFixture(page);
-  const login1 = await classFixture.createLoginInstance();
-  const dashboard = await classFixture.createDashboardInstance();
-  const mainHeader = await classFixture.createMainNavigationHeaderInstance();
-  const searchPage = await classFixture.createSearchPageInstance();
-  const productDetailPage = await classFixture.createProductDetailPageInstance();
+test("Product Listing Page Features", async ({ login, dashboard, mainNavigationHeader, searchPage, productDetailPage }) => {
 
-  await login1.navigateToPage('my-account/');
-  await login1.fillLoginDetails();
+  await login.navigateToPage(UserInput.urls.myAccount);
+  const user = Login.getUserById(UserInput.login['second user']);
+  await login.fillLoginDetails(user);
   await dashboard.navigateToDashboard();
-  await mainHeader.navigateToSearch("cool");
+  await mainNavigationHeader.navigateToSearch(UserInput.search.searchTerm1);
   await searchPage.searchResults();
-  await searchPage.lookForProduct("VARDHMAN COOL KNIT");
+  await searchPage.lookForProduct(UserInput.products.product3);
   await productDetailPage.selectProduct();
   //await productDetailPage.addQuantity(5);
   await productDetailPage.clickAddToCart();

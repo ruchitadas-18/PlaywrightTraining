@@ -4,7 +4,7 @@ import HandKnittedOptions from "../utils/categoryOptions.json";
 type HandKnittedOptionsType = typeof HandKnittedOptions;
 const handKnittedOptions: HandKnittedOptionsType = JSON.parse(JSON.stringify(HandKnittedOptions));
 
-export class mainVavigationHeader{
+export class mainNavigationHeader{
     page: Page;
     home: Locator;
     shop: Locator;
@@ -67,18 +67,18 @@ export class mainVavigationHeader{
         await this.wishList.click();
     }
 
-    async verifyWishListCount(expectedCount: string) {
+    async verifyWishListCount(expectedCount: number) {
         const actualCount = await this.wishListCount.textContent();
-        expect(actualCount).toBe(expectedCount);
+        expect(actualCount).toBe(expectedCount.toString());
     }
 
     async navigateToCart(){
         await this.cart.click();
     }
 
-    async verifyCartCount(expectedCount: string) {
+    async verifyCartCount(expectedCount: number) {
         const actualCount = await this.cartCount.textContent();
-        expect(actualCount).toBe(expectedCount);
+        expect(actualCount).toBe(expectedCount.toString());
     }
 
     async navigateToSearch(searchTerm: string){
@@ -89,4 +89,4 @@ export class mainVavigationHeader{
 
 }
 
-export default mainVavigationHeader;
+export default mainNavigationHeader;

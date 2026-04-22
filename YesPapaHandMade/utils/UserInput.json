@@ -1,0 +1,35 @@
+{
+    "urls": {
+        "myAccount": "my-account/",
+        "shop": "shop/",
+        "cart": "cart/",
+        "wishlist": "wishlist/"
+    },
+    "login": {
+        "first user":"1",
+        "second user":"2",
+        "third user":"3"
+    },
+    "navigation": {
+        "category": "Baby Sets",
+        "changeCategory": "Knitting Accessories & Crochets"
+    },
+    "view": {
+        "ltype": "list",
+        "gtype": "grid"
+    },
+    "category": {
+        "category1": "Baby Sets",
+        "category2": "Knitting Accessories & Crochets"
+    },
+    "products": {
+        "product1": "YES PAPA LABUBU DOLL The Monsters Big Energy Series Blind Box Cute Toy Decor Gift (Random Color – 1 Pc)",
+        "product2": "Yes Papa Bag Handles",
+        "product3": "VARDHMAN COOL KNIT",
+        "product4": "Oswal 4 Ply Knit Plus Yarn"
+    },
+    "search": {
+        "searchTerm1": "cool",
+        "searchTerm2": "bag handles"
+    }
+}
