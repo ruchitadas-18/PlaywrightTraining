@@ -12,7 +12,7 @@ test.only('RegisterUser', async ({ register }) => {
 });
 
 
-test('LoginUser', async ({ login }) => {
+test('@Login LoginUser', async ({ login }) => {
 
   //Navigating to login page
   await login.navigateToPage(UserInput.urls.myAccount);

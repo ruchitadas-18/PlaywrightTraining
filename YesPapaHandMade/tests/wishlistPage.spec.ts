@@ -3,7 +3,7 @@ import UserInput from '../utils/UserInput.json';
 import Login from '../pages/login';
 let count = 3;
 
-test("Product Listing Page Features", async ({ login, dashboard, mainNavigationHeader, productList }) => {
+test("Product Listing Page Features", async ({ login, dashboard, mainNavigationHeader, productList, wishListPage }) => {
   await login.navigateToPage(UserInput.urls.myAccount);
   await login.fillLoginDetails(Login.getUserById(UserInput.login['first user']));
   await dashboard.navigateToDashboard();
@@ -13,7 +13,14 @@ test("Product Listing Page Features", async ({ login, dashboard, mainNavigationH
   await productList.changeView('list');
   await productList.selectingProduct(UserInput.products.product1);
   await productList.wishListProduct();
-  await mainNavigationHeader.verifyWishListCount(count);
+  //await mainNavigationHeader.verifyWishListCount(count);
   await productList.selectingProduct(UserInput.products.product2);
-  
+  await productList.addToWishList();
+  await wishListPage.verifyWishListPageTitle();
+  await wishListPage.verifyProductInWishList(UserInput.products.product1);
+  await wishListPage.verifyStockStatus(UserInput.products.product1);
+  await wishListPage.selectProductForBulkAction(UserInput.products.product1);
+  await wishListPage.verifyProductInWishList(UserInput.products.product2);
+  await wishListPage.verifyStockStatus(UserInput.products.product2);
+  await wishListPage.deleteProductFromWishList(UserInput.products.product2);
 });

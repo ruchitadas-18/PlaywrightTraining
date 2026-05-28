@@ -2,7 +2,7 @@ import { test } from '../utils/objectFixture';
 import Login from '../pages/login'
 import UserInput from '../utils/UserInput.json';
 
-test("Product Listing Page Features", async ({ login, dashboard, mainNavigationHeader, searchPage, productDetailPage }) => {
+test("@PLP Product Listing Page Features", async ({ login, dashboard, mainNavigationHeader, searchPage, productDetailPage }) => {
 
   await login.navigateToPage(UserInput.urls.myAccount);
   const user = Login.getUserById(UserInput.login['second user']);

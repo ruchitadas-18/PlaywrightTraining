@@ -21,6 +21,7 @@ export class Register{
         this.email = this.page.locator('#reg_email');
         this.password = this.page.locator('#reg_password');
         this.regButton = this.page.getByRole('button', { name: 'Register' });
+
     }
     
     async navigateToPage(endpoint: string){

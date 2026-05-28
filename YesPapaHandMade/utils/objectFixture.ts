@@ -5,6 +5,7 @@ import ProductListingPage from "../pages/productListingPage";
 import MainNavigationHeader from "../pages/categoryHeader";
 import SearchPage from "../pages/search";
 import ProductDetailPage from "../pages/productDetailPage";
+import WishListPage from "../pages/wishlist";
 import { test as base } from "@playwright/test";
 
 type ObjectFixture = {
@@ -15,6 +16,7 @@ type ObjectFixture = {
     mainNavigationHeader: MainNavigationHeader; 
     searchPage: SearchPage;
     productDetailPage: ProductDetailPage;
+    wishListPage: WishListPage;
 };
 
 export const test = base.extend<ObjectFixture>({
@@ -39,6 +41,9 @@ export const test = base.extend<ObjectFixture>({
     },
     productDetailPage: async ({ page }, use) => {
         await use(new ProductDetailPage(page));
+    },
+    wishListPage: async ({ page }, use) => {
+        await use(new WishListPage(page));
     }
 });
 

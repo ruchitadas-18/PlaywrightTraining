@@ -12,5 +12,9 @@
     "@playwright/test": "^1.58.2",
     "@types/node": "^25.3.2",
     "typescript": "^6.0.2"
+  },
+  "dependencies": {
+    "@playwright/cli": "^0.1.11",
+    "exceljs": "^4.4.0"
   }
 }
