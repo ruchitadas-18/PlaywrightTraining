@@ -17,7 +17,9 @@ export class mainNavigationHeader{
     cartCount: Locator;
     search: Locator;
     searchInput: Locator;
-    verfyTitle:Locator
+    verfyTitle: Locator;
+    cartList:Locator;
+
     
     constructor(page: Page){
         this.page = page;
@@ -33,6 +35,7 @@ export class mainNavigationHeader{
         this.search = this.page.locator(".search-toggle-li");
         this.searchInput = this.page.locator(".header-searchform input");
         this.verfyTitle = this.page.locator(".page-header-title");
+        this.cartList = this.page.locator(".current-shop-items-dropdown li.woocommerce-mini-cart-item");
     }
 
     async navigateToHome(){
@@ -76,10 +79,24 @@ export class mainNavigationHeader{
         await this.cart.click();
     }
 
-    async verifyCartCount(expectedCount: number) {
-        const actualCount = await this.cartCount.textContent();
-        expect(actualCount).toBe(expectedCount.toString());
+    async verifyCartCount() {
+        await this.cart.hover();
+        await expect(this.cartList).toBeVisible();
+        const rowCount = await this.cartList.count();
+        let expectedCount = 0;
+        for (let i = 0; i < rowCount; i++) {
+            const items = await this.cartList.nth(i);
+            const itemName = await items.locator('h3 > a').innerText();
+            const quantityText = await items.locator('.quantity').innerText();
+            const itemCount = await items.locator('.quantity > .amount');
+            console.log(`Cart name: ${itemName},\n Cart count: ${itemCount}, \n Cart quantity text: ${quantityText} `);
+           expectedCount += parseInt(quantityText.split('×')[0].trim(), 10) * parseInt((await this.cartCount.innerText()).replace(/[^0-9]/g, ''), 10);
+        }
+        console.log(`Total cart count: ${expectedCount}`);
+        const subtotalValue = Number((await this.page.locator('.total .woocommerce-Price-amount bdi').textContent())?.replace(/[^0-9.]/g, ''));
+        expect(subtotalValue).toBe(expectedCount);
     }
+
 
     async navigateToSearch(searchTerm: string){
         await this.search.click();

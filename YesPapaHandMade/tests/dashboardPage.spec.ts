@@ -3,10 +3,11 @@ import UserInput from '../utils/UserInput.json';
 import Login from '../pages/login'
 const users = Login.users;
 
-test('Dashboard Page Features', async ({ login, dashboard }) => {
+test('Dashboard Page Features', async ({ login, dashboard, mainNavigationHeader }) => {
     await login.navigateToPage(UserInput.urls.myAccount);
     const user = Login.getUserById(UserInput.login['second user']);
     await login.fillLoginDetails(user);
     await dashboard.navigateToDashboard();
     await dashboard.addToCart(UserInput.products.product4);
+    await mainNavigationHeader.verifyCartCount();
 });

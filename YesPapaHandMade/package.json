@@ -6,5 +6,12 @@
     "allure-playwright": "^3.7.1",
     "typescript": "^6.0.2"
   },
-  "scripts": {}
+  "scripts": {
+    "productDetails": "npx playwright test productDetailPage.spec.ts --headed",
+    "wishlist": "npx playwright test wishlistPage.spec.ts --headed",
+    "registerationLogin": "npx playwright test registerationLogin.spec.ts --headed",
+    "cart": "npx playwright test cartPage.spec.ts --headed",
+    "reports": "allure generate allure-results --clean -o allure-report && allure open allure-report",
+    "dashboard": "npx playwright test dashboardPage.spec.ts"
+  }
 }

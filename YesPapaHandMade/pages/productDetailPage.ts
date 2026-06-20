@@ -10,13 +10,13 @@ export class ProductDetailPage {
     constructor(page:Page){
         this.page = page;
         this.selectProductName = page.locator('woo-selected-variation-item-name');
-        this.addToCartButton = this.page.getByRole('button', { name: "Add to cart" });
+        this.addToCartButton = this.page.getByRole('button', { name: 'Add to cart', exact: true });
         this.viewCartButton = this.page.getByRole('link', { name: 'View cart' });
         this.quantityInput = this.page.getByRole('spinbutton', { name: 'Product quantity' });
     }
 
     async selectProduct(){
-        const product = this.page.getByRole('radio', { name: 'VCK002' });
+        const product = this.page.getByRole('radio', { name: 'VCK009' });
         await product.click();
     }
 
@@ -25,6 +25,7 @@ export class ProductDetailPage {
     }
 
     async viewCart(){
+        await expect(this.viewCartButton).toBeVisible();
         await this.viewCartButton.click();
     }
     
