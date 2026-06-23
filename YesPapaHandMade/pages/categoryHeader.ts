@@ -88,14 +88,14 @@ export class mainNavigationHeader{
             const items = await this.cartList.nth(i);
             const itemName = await items.locator('h3 > a').innerText();
             const quantityText = await items.locator('.quantity').innerText();
-            const itemCount = await items.locator('.quantity > .amount');
+            const itemCount = await items.locator('.quantity > .amount').innerText();
             console.log(`Cart name: ${itemName},\n Cart count: ${itemCount}, \n Cart quantity text: ${quantityText} `);
-           expectedCount += parseInt(quantityText.split('×')[0].trim(), 10) * parseInt((await this.cartCount.innerText()).replace(/[^0-9]/g, ''), 10);
+            expectedCount += parseInt(quantityText.split('×')[0].trim(), 10) * parseFloat(itemCount.replace(/[^0-9.]/g, ''));
         }
         console.log(`Total cart count: ${expectedCount}`);
-        const subtotalValue = Number((await this.page.locator('.total .woocommerce-Price-amount bdi').textContent())?.replace(/[^0-9.]/g, ''));
+        const subtotalValue = Number((await this.page .locator('.widget_shopping_cart_content').locator('.woocommerce-mini-cart__total.total bdi') .first().innerText()).replace(/[^0-9.]/g, ''));
         expect(subtotalValue).toBe(expectedCount);
-    }
+        }
 
 
     async navigateToSearch(searchTerm: string){
